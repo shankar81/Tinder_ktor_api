@@ -1,5 +1,6 @@
 package routes
 
+import database.queries.OTPQueries
 import database.queries.UserQueries
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -7,10 +8,7 @@ import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
-import models.AuthResponse
-import models.Response
-import models.Result
-import models.User
+import models.*
 import org.jetbrains.exposed.sql.Database
 import user
 
@@ -19,23 +17,48 @@ fun Route.authRoutes() {
     post("/login") {
         val user = call.receive<User>()
         val users = UserQueries.find(phone = user.phone)
-        val response: Response<AuthResponse>
-
+        val userId: Int
         /**
          * If user is not exist then only create user
          */
         if (users == null || users.isEmpty()) {
-            val userId = UserQueries.createUser(user.phone)
-
+            userId = UserQueries.createUser(user.phone)
             user.id = userId
-
-            val token = user.generateToken()
-            response = Response(AuthResponse(user, token), "Token is sent!", Result.SUCCESS.ordinal)
-            call.respond(response)
         } else {
-            response = Response(AuthResponse(user, null), "User Already exists", Result.ERROR.ordinal)
+            user.id = users[0].id
         }
 
+        // Generate OTP
+        var otp = OTPQueries.find(user.phone)
+        otp = if (otp != null) {
+            OTPQueries.update(otp)
+        } else {
+            OTPQueries.create(user.phone)
+        }
+
+        // @TODO Sent OTP SMS
+        // ...
+        val response = Response(OTPResponse(user, otp.otp), "OTP has been sent!", Result.SUCCESS.ordinal)
+        call.respond(response)
+    }
+
+    post("/verifyOtp") {
+        val requestUser = call.receive<AuthRequest>()
+        val users = UserQueries.find(phone = requestUser.phone)
+
+        val response: Response<AuthResponse?> = if (users == null || users.isEmpty()) {
+            Response(null, "OTP Verification failed", Result.ERROR.ordinal)
+        } else {
+            val user = users[0]
+            val otp = OTPQueries.find(user.phone)
+
+            if (otp != null && otp.otp == requestUser.otp && otp.phone == requestUser.phone) {
+                val token = user.generateToken()
+                Response(AuthResponse(user, token), "Token is sent!", Result.SUCCESS.ordinal)
+            } else {
+                Response(null, "OTP Verification failed", Result.ERROR.ordinal)
+            }
+        }
         call.respond(response)
     }
 

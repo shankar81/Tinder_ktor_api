@@ -2,6 +2,7 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.fasterxml.jackson.databind.SerializationFeature
 import database.DB
+import database.OTPTable
 import database.UserTable
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -34,6 +35,7 @@ fun Application.mainModule() {
 
     transaction {
         SchemaUtils.create(UserTable)
+        SchemaUtils.create(OTPTable)
     }
 
     install(StatusPages) {
