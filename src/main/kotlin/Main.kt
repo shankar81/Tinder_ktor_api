@@ -23,7 +23,8 @@ import routes.authRoutes
 
 private fun getVerifier() = JWT.require(Algorithm.HMAC256("MySecret")).build()
 
-const val PORT = 8080
+val PORT = System.getenv("PORT")?.toInt() ?: 8080
+
 fun main() {
     val server = embeddedServer(Netty, PORT, module = Application::mainModule)
 
