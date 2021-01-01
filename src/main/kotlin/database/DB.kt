@@ -17,7 +17,7 @@ object DB {
             val dbUri = URI(dbUrl)
             host = dbUri.host
             port = dbUri.port
-            dbName = dbUri.path
+            dbName = dbUri.path.substring(1)
             val userInfo = dbUri.userInfo.split(":")
             dbUser = userInfo[0]
             dbPassword = userInfo[1]
