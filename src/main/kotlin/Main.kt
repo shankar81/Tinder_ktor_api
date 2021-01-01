@@ -74,7 +74,7 @@ fun Application.mainModule() {
             application.log.info(it.buildText())
         }
         get("/") {
-            call.respond("API is working fine!!")
+            call.respond("API is working fine!  !")
         }
 
         authRoutes()
