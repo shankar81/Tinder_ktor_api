@@ -9,6 +9,10 @@ object DB {
     private val dbUser = "tinder_user"
     private val dbPassword = "tinderpass123"
 
+    init {
+        val dbUrl = System.getenv("")
+    }
+
     fun connect() = Database.connect(
         "jdbc:postgresql://$host:$port/$dbName",
         driver = "org.postgresql.Driver",

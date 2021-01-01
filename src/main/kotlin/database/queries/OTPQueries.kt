@@ -1,5 +1,6 @@
 package database.queries
 
+import asOTP
 import database.OTPTable
 import models.OTP
 import org.jetbrains.exposed.sql.ResultRow
@@ -64,4 +65,3 @@ object OTPQueries : OTPService {
     }
 }
 
-fun ResultRow.asOTP() = OTP(get(OTPTable.id).value, get(OTPTable.otp), get(OTPTable.phone))

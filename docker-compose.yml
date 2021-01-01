@@ -1,0 +1,22 @@
+version: '3'
+services:
+  tinderr_database:
+    image: postgres:11
+    ports:
+      - 5555:5432
+    environment:
+      - POSTGRES_USER=tinderr_user
+      - POSTGRES_PASSWORD=tinderrpass123
+      - POSTGRES_DB=tinderr_db
+  web:
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - tinderr_database
+    environment:
+      - DB_HOST=tinderr_database
+      - DB_PORT=5432
+      - DB_USER=tinderr_user
+      - DB_PASSWORD=tinderrpass123
+      - DB_NAME=tinderr_db

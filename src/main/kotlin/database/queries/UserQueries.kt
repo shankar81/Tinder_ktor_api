@@ -1,5 +1,6 @@
 package database.queries
 
+import asUser
 import database.UserTable
 import models.User
 import org.jetbrains.exposed.sql.*
@@ -71,4 +72,3 @@ object UserQueries : UserService {
 }
 
 
-fun ResultRow.asUser() = User(get(UserTable.id).value, get(UserTable.name), get(UserTable.phone))
