@@ -6,7 +6,7 @@ import models.User
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
-interface UserService {
+private interface UserService {
     suspend fun createUser(phone: String): Int
     suspend fun find(id: Int? = null, phone: String? = null): List<User>?
     suspend fun deleteUser(id: Int?): Int

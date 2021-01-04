@@ -3,6 +3,7 @@ import com.auth0.jwt.algorithms.Algorithm
 import com.fasterxml.jackson.databind.SerializationFeature
 import database.DB
 import database.OTPTable
+import database.PassionTable
 import database.UserTable
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -20,6 +21,7 @@ import models.User
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import routes.authRoutes
+import routes.passionRoutes
 
 private fun getVerifier() = JWT.require(Algorithm.HMAC256("MySecret")).build()
 
@@ -37,6 +39,7 @@ fun Application.mainModule() {
     transaction {
         SchemaUtils.create(UserTable)
         SchemaUtils.create(OTPTable)
+        SchemaUtils.create(PassionTable)
     }
 
     install(StatusPages) {
@@ -73,10 +76,15 @@ fun Application.mainModule() {
         trace {
             application.log.info(it.buildText())
         }
+
         get("/") {
             call.respond("API is working fine!  !")
         }
+        get("/passions1") {
+            call.respond("API is working fine!  !")
+        }
 
+        passionRoutes()
         authRoutes()
     }
 }

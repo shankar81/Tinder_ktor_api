@@ -9,7 +9,6 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import models.*
-import org.jetbrains.exposed.sql.Database
 import user
 
 fun Route.authRoutes() {
@@ -65,7 +64,7 @@ fun Route.authRoutes() {
     // Verify the if user is logged in
     authenticate {
         get("/verify") {
-            val response = Response<AuthResponse>(
+            val response = Response(
                 AuthResponse(call.user, null),
                 "Authenticated Successfully",
                 Result.SUCCESS.ordinal

@@ -22,11 +22,11 @@ object DB {
             dbUser = userInfo[0]
             dbPassword = userInfo[1]
         } else {
-            host = System.getenv("DB_HOST")
-            port = System.getenv("DB_PORT").toInt()
-            dbName = System.getenv("DB_NAME")
-            dbUser = System.getenv("DB_USER")
-            dbPassword = System.getenv("DB_PASSWORD")
+            host = System.getenv("DB_HOST") ?: "localhost"
+            port = 8080
+            dbName = System.getenv("DB_NAME") ?: "tinderr_db"
+            dbUser = System.getenv("DB_USER") ?: "tinderr_user"
+            dbPassword = System.getenv("DB_PASSWORD") ?: "tinderrpass123"
         }
     }
 
