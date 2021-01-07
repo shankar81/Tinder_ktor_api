@@ -1,3 +1,3 @@
 package models
 
-data class Passion(val id: Int, val name: String)
+data class Passion(val id: Int?, val name: String)

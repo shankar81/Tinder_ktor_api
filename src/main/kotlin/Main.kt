@@ -80,10 +80,6 @@ fun Application.mainModule() {
         get("/") {
             call.respond("API is working fine!  !")
         }
-        get("/passions1") {
-            call.respond("API is working fine!  !")
-        }
-
         passionRoutes()
         authRoutes()
     }

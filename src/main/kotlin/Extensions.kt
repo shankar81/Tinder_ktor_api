@@ -1,4 +1,5 @@
 import database.OTPTable
+import database.PassionTable
 import database.UserTable
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -13,4 +14,4 @@ fun ResultRow.asOTP() = OTP(get(OTPTable.id).value, get(OTPTable.otp), get(OTPTa
 
 fun ResultRow.asUser() = User(get(UserTable.id).value, get(UserTable.name), get(UserTable.phone))
 
-fun ResultRow.asPassion() = Passion(get(UserTable.id).value, get(UserTable.name))
+fun ResultRow.asPassion() = Passion(get(PassionTable.id).value, get(PassionTable.name))
