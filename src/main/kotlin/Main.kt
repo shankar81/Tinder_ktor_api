@@ -2,9 +2,10 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.fasterxml.jackson.databind.SerializationFeature
 import database.DB
-import database.OTPTable
-import database.PassionTable
-import database.UserTable
+import database.tables.OTPTable
+import database.tables.PassionTable
+import database.tables.UserDetailsTable
+import database.tables.UserTable
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.auth.jwt.*
@@ -40,6 +41,7 @@ fun Application.mainModule() {
         SchemaUtils.create(UserTable)
         SchemaUtils.create(OTPTable)
         SchemaUtils.create(PassionTable)
+        SchemaUtils.create(UserDetailsTable)
     }
 
     install(StatusPages) {
@@ -68,7 +70,6 @@ fun Application.mainModule() {
                     null
                 }
             }
-
         }
     }
 

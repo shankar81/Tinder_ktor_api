@@ -1,6 +1,7 @@
 package routes
 
 import database.queries.OTPQueries
+import database.queries.UserDetailQueries
 import database.queries.UserQueries
 import io.ktor.application.*
 import io.ktor.auth.*
@@ -73,4 +74,34 @@ fun Route.authRoutes() {
         }
     }
 
+    route("/userDetails") {
+        // Save user data
+        authenticate {
+            post("") {
+                val userDetail = call.receive<UserDetails>()
+
+                val newDetail = UserDetailQueries.create(userDetail)
+
+                call.respond(Response(newDetail, "Created user detail", Result.SUCCESS.ordinal))
+            }
+        }
+
+        // Send logged in user data
+        authenticate {
+            get("") {
+                val detail = UserDetailQueries.getDetail(call.user.id)
+
+                call.respond(Response(detail, "Detail of ${call.user.id}", Result.SUCCESS.ordinal))
+            }
+        }
+
+        // Send all users data
+        authenticate {
+            get("/all") {
+                val details = UserDetailQueries.getAllDetail()
+
+                call.respond(Response(details, "All user details", Result.SUCCESS.ordinal))
+            }
+        }
+    }
 }

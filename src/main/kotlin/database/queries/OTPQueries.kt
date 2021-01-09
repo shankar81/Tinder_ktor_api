@@ -1,9 +1,8 @@
 package database.queries
 
 import asOTP
-import database.OTPTable
+import database.tables.OTPTable
 import models.OTP
-import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction

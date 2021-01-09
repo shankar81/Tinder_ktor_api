@@ -1,7 +1,7 @@
 package database.queries
 
 import asUser
-import database.UserTable
+import database.tables.UserTable
 import models.User
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction

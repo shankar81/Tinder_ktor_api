@@ -1,7 +1,7 @@
 package database.queries
 
 import asPassion
-import database.PassionTable
+import database.tables.PassionTable
 import models.Passion
 import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.selectAll
