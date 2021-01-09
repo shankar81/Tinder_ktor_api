@@ -8,7 +8,7 @@ import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 
-private interface OTPService {
+interface OTPService {
     fun create(phone: String): OTP
     fun update(otp: OTP): OTP
     fun find(phone: String): OTP?

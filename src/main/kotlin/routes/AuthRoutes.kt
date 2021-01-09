@@ -1,8 +1,6 @@
 package routes
 
-import database.queries.OTPQueries
-import database.queries.UserDetailQueries
-import database.queries.UserQueries
+import database.queries.*
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.http.*

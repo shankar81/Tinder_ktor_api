@@ -7,7 +7,7 @@ import org.jetbrains.exposed.sql.insertAndGetId
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
-private interface PassionService {
+interface PassionService {
     fun getPassions(): List<Passion>
     fun createPassion(passionName: String): Passion
 }
