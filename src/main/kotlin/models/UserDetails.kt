@@ -12,7 +12,7 @@ data class UserDetails(
     val email: String,
     val dob: Long,
     val gender: Gender,
-    val orientation: String,
+    val orientations: String,
     val showMe: ShowMe,
     val university: String,
     val passions: String,

@@ -30,7 +30,7 @@ object UserDetailQueries : UserDetailService {
                 it[email] = details.email
                 it[dob] = details.dob
                 it[gender] = details.gender
-                it[orientation] = details.orientation
+                it[orientation] = details.orientations
                 it[showMe] = details.showMe
                 it[university] = details.university
                 it[passions] = details.passions
