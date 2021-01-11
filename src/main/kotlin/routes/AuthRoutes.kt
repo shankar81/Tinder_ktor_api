@@ -52,7 +52,8 @@ fun Route.authRoutes() {
 
             if (otp != null && otp.otp == requestUser.otp && otp.phone == requestUser.phone) {
                 val token = user.generateToken()
-                Response(AuthResponse(user, token), "Token is sent!", Result.SUCCESS.ordinal)
+                val details = UserDetailQueries.getDetail(user.id)
+                Response(AuthResponse(user, token, details != null), "Token is sent!", Result.SUCCESS.ordinal)
             } else {
                 Response(null, "OTP Verification failed", Result.ERROR.ordinal)
             }
@@ -63,8 +64,9 @@ fun Route.authRoutes() {
     // Verify the if user is logged in
     authenticate {
         get("/verify") {
+            val details = UserDetailQueries.getDetail(call.user.id)
             val response = Response(
-                AuthResponse(call.user, null),
+                AuthResponse(call.user, null, details != null),
                 "Authenticated Successfully",
                 Result.SUCCESS.ordinal
             )
