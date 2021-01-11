@@ -13,6 +13,8 @@ data class UserDetails(
     val dob: Long,
     val gender: Gender,
     val orientations: String,
+    val showOrientations: Boolean,
+    val showGender: Boolean,
     val showMe: ShowMe,
     val university: String,
     val passions: String,
