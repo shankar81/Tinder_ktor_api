@@ -19,6 +19,8 @@ object UserDetailsTable : IntIdTable() {
     val dob = long("dob")
     val gender = enumeration("gender", Gender::class)
     val orientation = varchar("orientation", 300)
+    val showOrientations = bool("showOrientations").default(false)
+    val showGender = bool("showGender").default(false)
     val showMe = enumeration("showMe", ShowMe::class)
     val university = varchar("university", 50)
     val passions = varchar("passions", 300)

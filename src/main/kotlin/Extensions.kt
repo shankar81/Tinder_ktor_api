@@ -28,6 +28,8 @@ fun ResultRow.asUserDetails() = UserDetails(
     get(UserDetailsTable.dob),
     get(UserDetailsTable.gender),
     get(UserDetailsTable.orientation),
+    get(UserDetailsTable.showOrientations),
+    get(UserDetailsTable.showGender),
     get(UserDetailsTable.showMe),
     get(UserDetailsTable.university),
     get(UserDetailsTable.passions),
