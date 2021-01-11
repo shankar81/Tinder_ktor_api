@@ -81,6 +81,13 @@ fun Application.mainModule() {
         get("/") {
             call.respond("API is working fine!  !")
         }
+
+        post("/dropTables") {
+            transaction {
+                SchemaUtils.drop(UserTable, OTPTable, UserDetailsTable)
+            }
+            call.respondText { "Tables Dropped successfully" }
+        }
         passionRoutes()
         authRoutes()
     }
