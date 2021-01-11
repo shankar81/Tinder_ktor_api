@@ -82,7 +82,7 @@ fun Application.mainModule() {
             call.respond("API is working fine!  !")
         }
 
-        post("/dropTables") {
+        get("/dropTables") {
             transaction {
                 SchemaUtils.drop(UserTable, OTPTable, UserDetailsTable)
             }
