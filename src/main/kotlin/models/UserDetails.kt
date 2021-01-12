@@ -6,7 +6,7 @@ import database.tables.ShowMe
 data class UserDetails(
     var id: Int? = null,
     val userId: Int,
-    val token: String,
+    var token: String,
     val phone: String,
     val name: String,
     val email: String,

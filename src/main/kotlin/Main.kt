@@ -46,7 +46,7 @@ fun Application.mainModule() {
 
     install(StatusPages) {
         status(HttpStatusCode.Unauthorized) {
-            val response = Response(null, "Please enter valid phone number", Result.ERROR.ordinal)
+            val response = Response(null, "Please enter valid credentials", Result.ERROR.ordinal)
             call.respond(HttpStatusCode.Unauthorized, response)
         }
     }
