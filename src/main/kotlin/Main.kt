@@ -11,6 +11,7 @@ import io.ktor.auth.*
 import io.ktor.auth.jwt.*
 import io.ktor.features.*
 import io.ktor.http.*
+import io.ktor.http.content.*
 import io.ktor.jackson.*
 import io.ktor.response.*
 import io.ktor.routing.*
@@ -23,6 +24,7 @@ import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import routes.authRoutes
 import routes.passionRoutes
+import routes.uploadRoutes
 
 private fun getVerifier() = JWT.require(Algorithm.HMAC256("MySecret")).build()
 
@@ -90,5 +92,10 @@ fun Application.mainModule() {
         }
         passionRoutes()
         authRoutes()
+        uploadRoutes()
+
+        static("files") {
+            files(Constants.UPLOAD_FILE_PATH)
+        }
     }
 }
